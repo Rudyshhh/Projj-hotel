@@ -61,7 +61,7 @@ export default function Rooms() {
 
                                 <button
                                     onClick={() => router.push(`/book/${room.id}`)}
-                                    className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
+                                    className="mt-4 bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded w-full"
                                 >
                                     Book Now
                                 </button>

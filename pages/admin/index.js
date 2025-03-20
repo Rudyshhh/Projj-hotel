@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import { useAuth } from '../../contexts/AuthContext';
 import api from '../../utils/api';
+import AdminAddRoom from "../../components/AdminAddRoom";
 
 export default function AdminDashboard() {
   const { user, isAuthenticated } = useAuth();

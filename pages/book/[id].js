@@ -9,7 +9,7 @@
 //   const router = useRouter();
 //   const { id } = router.query;
 //   const { isAuthenticated } = useAuth();
-  
+
 //   const [room, setRoom] = useState(null);
 //   const [checkIn, setCheckIn] = useState('');
 //   const [checkOut, setCheckOut] = useState('');
@@ -42,19 +42,19 @@
 
 //   const calculateCurrentPrice = async () => {
 //     if (!checkIn || !checkOut) return;
-    
+
 //     try {
 //       const checkInDate = new Date(checkIn);
 //       const checkOutDate = new Date(checkOut);
-      
+
 //       if (checkInDate >= checkOutDate) {
 //         setError('Check-out date must be after check-in date');
 //         return;
 //       }
-      
+
 //       const data = await api.get(`/rooms/${id}?check_in=${checkIn}T12:00:00Z&check_out=${checkOut}T12:00:00Z`);
 //       setCurrentPrice(data.current_price);
-      
+
 //       const nights = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
 //       setTotalPrice(data.current_price * nights);
 //     } catch (error) {
@@ -71,27 +71,27 @@
 //   const handleSubmit = async (e) => {
 //     e.preventDefault();
 //     setError('');
-    
+
 //     if (!checkIn || !checkOut) {
 //       setError('Please select check-in and check-out dates');
 //       return;
 //     }
-    
+
 //     const checkInDate = new Date(checkIn);
 //     const checkOutDate = new Date(checkOut);
-    
+
 //     if (checkInDate >= checkOutDate) {
 //       setError('Check-out date must be after check-in date');
 //       return;
 //     }
-    
+
 //     try {
 //       await api.post('/bookings', {
 //         room_id: id,
 //         check_in: `${checkIn}T12:00:00Z`,
 //         check_out: `${checkOut}T12:00:00Z`
 //       });
-      
+
 //       router.push('/bookings');
 //     } catch (error) {
 //       if (error.response && error.response.data) {
@@ -126,14 +126,14 @@
 //     <Layout>
 //       <div className="max-w-2xl mx-auto">
 //         <h1 className="text-2xl font-bold mb-6">Book a Room</h1>
-        
+
 //         <div className="bg-white rounded-lg shadow-md overflow-hidden mb-6">
 //           <div className="p-6">
 //             <h2 className="text-xl font-semibold">{room.name}</h2>
 //             <p className="text-gray-600 mt-2">{room.description}</p>
 //             <p className="text-gray-700 mt-2">Base Price: ${room.base_price.toFixed(2)} / night</p>
 //             <p className="text-gray-700">Capacity: {room.capacity} guests</p>
-            
+
 //             {currentPrice && (
 //               <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded">
 //                 <p className="font-semibold text-blue-800">
@@ -151,13 +151,13 @@
 //             )}
 //           </div>
 //         </div>
-        
+
 //         {error && (
 //           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
 //             {error}
 //           </div>
 //         )}
-        
+
 //         <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
 //           <div className="mb-4">
 //             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="checkIn">
@@ -298,11 +298,22 @@ export default function BookRoom() {
     }
 
     try {
-      await api.post('/bookings', {
-        room_id: id,
-        check_in: `${checkIn}T12:00:00Z`,
-        check_out: `${checkOut}T12:00:00Z`
-      });
+      const token = localStorage.getItem('token'); // Retrieve token from local storage or state
+
+      await api.post(
+        '/bookings',
+        {
+          room_id: id,
+          check_in: `${checkIn}T12:00:00Z`,
+          check_out: `${checkOut}T12:00:00Z`
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+
+
+        });
 
       router.push('/bookings');
     } catch (error) {

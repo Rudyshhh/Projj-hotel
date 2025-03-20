@@ -30,7 +30,8 @@ export function AuthProvider({ children }) {
 
 const register = async (email, password) => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/register", {
+      // const response = await fetch("http://127.0.0.1:8000/register", {
+      const response = await fetch("https://hotel-management-site-xl9h.onrender.com/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -57,7 +58,7 @@ const register = async (email, password) => {
   
   const login = async (email, password) => {
     try {
-        const response = await fetch("http://127.0.0.1:8000/token", {
+        const response = await fetch("https://hotel-management-site-xl9h.onrender.com/token", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams({ username: email, password }),
@@ -75,7 +76,7 @@ const register = async (email, password) => {
 
         localStorage.setItem("token", data.access_token);
 
-        const userRes = await fetch("http://127.0.0.1:8000/user/me", {
+        const userRes = await fetch("https://hotel-management-site-xl9h.onrender.com/user/me", {
             method: "GET",
             headers: { Authorization: `Bearer ${data.access_token}` },
         });

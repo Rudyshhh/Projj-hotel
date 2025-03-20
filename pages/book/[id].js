@@ -331,7 +331,7 @@ export default function BookRoom() {
 
         <div className="bg-white rounded-lg shadow-md overflow-hidden mb-6">
           <div className="p-6">
-            <h2 className="text-xl font-semibold">{room.name}</h2>
+            <h2 className="text-teal-700 font-semibold">{room.name}</h2>
             <p className="text-gray-600 mt-2">{room.description}</p>
             <p className="text-gray-700 mt-2">Base Price: ${room.base_price.toFixed(2)} / night</p>
             <p className="text-gray-700">Capacity: {room.capacity} guests</p>

@@ -27,31 +27,6 @@ export function AuthProvider({ children }) {
     loadUserFromLocalStorage();
   }, []);
 
-//   const login = async (email, password) => {
-//     try {
-//       const data = await api.login(email, password);
-//       localStorage.setItem('token', data.access_token);
-//       api.setToken(data.access_token);
-//       const userData = await api.get('/users/me');
-//       setUser(userData);
-//       return userData;
-//     } catch (error) {
-//       throw error;
-//     }
-//   };
-
-
-  
-  
-
-//   const register = async (email, password) => {
-//     try {
-//       const userData = await api.register(email, password);
-//       return userData;
-//     } catch (error) {
-//       throw error;
-//     }
-//   };
 
 const register = async (email, password) => {
     try {
@@ -63,10 +38,10 @@ const register = async (email, password) => {
         body: JSON.stringify({ email, password }),
       });
   
-      const text = await response.text(); // Read response as text
+      const text = await response.text(); 
       console.log("Raw Response:", text);
   
-      const data = JSON.parse(text); // Convert to JSON
+      const data = JSON.parse(text); 
       console.log("Parsed JSON:", data);
   
       if (!response.ok) {
@@ -79,37 +54,6 @@ const register = async (email, password) => {
     }
   };
   
-  // const login = async (email, password) => {
-  //   try {
-  //     const response = await fetch("http://127.0.0.1:8000/token", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/x-www-form-urlencoded",
-  //       },
-  //       body: new URLSearchParams({
-  //         username: email,
-  //         password: password,
-  //       }),
-  //     });
-  
-  //     const text = await response.text();
-  //     console.log("Raw Response:", text);
-  
-  //     const data = JSON.parse(text);
-  //     console.log("Parsed JSON:", data);
-  
-  //     if (!response.ok) {
-  //       throw new Error(data.detail || "Login failed");
-  //     }
-  
-  //     localStorage.setItem("token", data.access_token);
-  //     return data;
-  //   } catch (error) {
-  //     console.error("Login error:", error);
-  //     throw error;
-  //   }
-  // };
-
   
   const login = async (email, password) => {
     try {

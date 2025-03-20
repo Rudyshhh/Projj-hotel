@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react';
-import { AuthProvider } from '../contexts/AuthContext';
-import '../styles/globals.css';
+// pages/_app.js
+import { useState, useEffect } from "react";
+import { AuthProvider } from "../contexts/AuthContext";
+import { ThemeProvider } from "@/components/theme-provider";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
@@ -15,7 +17,9 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <AuthProvider>
-      <Component {...pageProps} />
+      <ThemeProvider defaultTheme="dark">
+        <Component {...pageProps} />
+      </ThemeProvider>
     </AuthProvider>
   );
 }
